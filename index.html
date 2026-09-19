@@ -3,99 +3,787 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Uganda Loan Application</title>
+
+  <title>Uganda Loan Application Portal</title>
 
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     body {
-      background: #f4f6f8;
+      background: #f4f5f6;
       color: #222;
+      min-height: 100vh;
     }
 
-    .header {
+    /* HEADER */
+    .topbar {
       background: #ffcc00;
-      padding: 22px 18px;
-      text-align: center;
-      border-bottom: 5px solid #222;
+      padding: 18px 20px;
+      border-bottom: 3px solid #111;
     }
 
-    .header h1 {
-      font-size: 25px;
-      color: #222;
+    .brand {
+      max-width: 600px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
-    .header p {
-      margin-top: 6px;
-      font-size: 14px;
+    .logo {
+      width: 48px;
+      height: 48px;
+      background: #111;
+      color: #ffcc00;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 18px;
     }
 
+    .brand h1 {
+      font-size: 20px;
+    }
+
+    .brand p {
+      font-size: 12px;
+      margin-top: 3px;
+    }
+
+    /* MAIN */
     .container {
-      width: 92%;
-      max-width: 520px;
+      width: 94%;
+      max-width: 600px;
       margin: 25px auto;
     }
 
     .card {
-      background: white;
-      padding: 25px;
-      border-radius: 14px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
     }
 
     .card h2 {
-      margin-bottom: 8px;
-      color: #222;
+      font-size: 23px;
+      margin-bottom: 7px;
     }
 
-    .intro {
+    .subtitle {
       color: #666;
       font-size: 14px;
+      line-height: 1.5;
       margin-bottom: 22px;
+    }
+
+    /* PROGRESS */
+    .progress {
+      display: flex;
+      margin-bottom: 25px;
+      gap: 5px;
+    }
+
+    .progress div {
+      height: 5px;
+      flex: 1;
+      background: #ddd;
+      border-radius: 10px;
+    }
+
+    .progress .active {
+      background: #ffcc00;
+    }
+
+    /* FORM */
+    .step {
+      display: none;
+    }
+
+    .step.active {
+      display: block;
+    }
+
+    .step-title {
+      font-size: 17px;
+      font-weight: bold;
+      margin-bottom: 16px;
     }
 
     label {
       display: block;
-      margin-top: 15px;
-      margin-bottom: 7px;
-      font-weight: bold;
       font-size: 14px;
+      font-weight: bold;
+      margin: 15px 0 7px;
     }
 
-    input, select {
+    input,
+    select,
+    textarea {
       width: 100%;
-      padding: 13px;
+      padding: 14px;
       border: 1px solid #ccc;
-      border-radius: 8px;
+      border-radius: 9px;
       font-size: 15px;
+      background: #fff;
       outline: none;
     }
 
-    input:focus, select:focus {
-      border-color: #ffcc00;
+    textarea {
+      min-height: 90px;
+      resize: vertical;
     }
 
-    .button {
-      width: 100%;
-      margin-top: 24px;
-      padding: 14px;
-      background: #ffcc00;
-      color: #111;
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #e6b800;
+      box-shadow: 0 0 0 2px rgba(255,204,0,0.15);
+    }
+
+    .hint {
+      color: #777;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    /* BUTTONS */
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 25px;
+    }
+
+    button {
       border: none;
-      border-radius: 8px;
-      font-size: 16px;
+      border-radius: 9px;
+      padding: 14px;
+      font-size: 15px;
       font-weight: bold;
       cursor: pointer;
     }
 
-    .button:hover {
-      background: #e6b800;
+    .next,
+    .submit {
+      flex: 1;
+      background: #ffcc00;
+      color: #111;
     }
 
-    .message {
-      display
+    .back {
+      width: 100px;
+      background: #eee;
+      color: #222;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    /* REVIEW */
+    .review {
+      background: #f7f7f7;
+      border-radius: 10px;
+      padding: 15px;
+    }
+
+    .review-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 11px 0;
+      border-bottom: 1px solid #ddd;
+      font-size: 14px;
+    }
+
+    .review-row:last-child {
+      border-bottom: none;
+    }
+
+    .review-row span:first-child {
+      color: #666;
+    }
+
+    .review-row span:last-child {
+      font-weight: bold;
+      text-align: right;
+    }
+
+    /* CONSENT */
+    .consent {
+      margin-top: 18px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .consent input {
+      width: auto;
+      margin-top: 3px;
+    }
+
+    /* SUCCESS */
+    .success {
+      display: none;
+      text-align: center;
+      padding: 20px 5px;
+    }
+
+    .success-icon {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      background: #e7f6ec;
+      color: #198754;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 35px;
+      font-weight: bold;
+    }
+
+    .success h2 {
+      margin-bottom: 10px;
+    }
+
+    .success p {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .application-number {
+      background: #f4f4f4;
+      padding: 13px;
+      border-radius: 8px;
+      margin: 20px 0;
+      font-weight: bold;
+    }
+
+    /* SECURITY NOTICE */
+    .security {
+      margin-top: 20px;
+      padding: 13px;
+      background: #fff8d6;
+      border-left: 4px solid #ffcc00;
+      border-radius: 6px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 25px 15px;
+      color: #777;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .error {
+      color: #c62828;
+      font-size: 12px;
+      margin-top: 5px;
+      display: none;
+    }
+
+    @media (max-width: 450px) {
+      .card {
+        padding: 19px;
+      }
+
+      .brand h1 {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">UG</div>
+
+      <div>
+        <h1>Uganda Loan Application</h1>
+        <p>Online Loan Application Portal</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="container">
+
+    <div class="card">
+
+      <!-- PROGRESS -->
+      <div class="progress">
+        <div id="bar1" class="active"></div>
+        <div id="bar2"></div>
+        <div id="bar3"></div>
+      </div>
+
+      <!-- STEP 1 -->
+      <section id="step1" class="step active">
+
+        <h2>Apply for a Loan</h2>
+
+        <p class="subtitle">
+          Complete the application below. Make sure the information you
+          provide is accurate.
+        </p>
+
+        <div class="step-title">
+          Personal Information
+        </div>
+
+        <label for="fullName">Full Name</label>
+        <input
+          id="fullName"
+          type="text"
+          placeholder="Enter your full name"
+          autocomplete="name"
+          required
+        >
+
+        <label for="phone">Uganda Mobile Number</label>
+        <input
+          id="phone"
+          type="tel"
+          placeholder="e.g. 0771234567"
+          autocomplete="tel"
+          maxlength="10"
+          required
+        >
+
+        <p class="hint">
+          Enter the mobile number you use for communication.
+        </p>
+
+        <label for="email">Email Address</label>
+        <input
+          id="email"
+          type="email"
+          placeholder="example@email.com"
+          autocomplete="email"
+        >
+
+        <label for="location">District / Location</label>
+        <input
+          id="location"
+          type="text"
+          placeholder="Enter your district"
+          required
+        >
+
+        <div class="buttons">
+          <button class="next" type="button" onclick="nextStep(1)">
+            Continue
+          </button>
+        </div>
+
+      </section>
+
+
+      <!-- STEP 2 -->
+      <section id="step2" class="step">
+
+        <h2>Loan Details</h2>
+
+        <p class="subtitle">
+          Tell us about the amount and purpose of your loan request.
+        </p>
+
+        <div class="step-title">
+          Loan Information
+        </div>
+
+        <label for="amount">Loan Amount (UGX)</label>
+        <input
+          id="amount"
+          type="number"
+          placeholder="Enter amount"
+          min="1"
+          required
+        >
+
+        <label for="term">Loan Term</label>
+        <select id="term" required>
+          <option value="">Select loan term</option>
+          <option value="1 Month">1 Month</option>
+          <option value="3 Months">3 Months</option>
+          <option value="6 Months">6 Months</option>
+          <option value="12 Months">12 Months</option>
+        </select>
+
+        <label for="purpose">Purpose of Loan</label>
+        <select id="purpose" required>
+          <option value="">Select purpose</option>
+          <option value="Business">Business</option>
+          <option value="Education">Education</option>
+          <option value="Agriculture">Agriculture</option>
+          <option value="Emergency">Emergency</option>
+          <option value="Personal">Personal</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <label for="income">Approximate Monthly Income (UGX)</label>
+        <input
+          id="income"
+          type="number"
+          placeholder="Enter approximate income"
+          min="0"
+        >
+
+        <label for="message">Additional Information</label>
+        <textarea
+          id="message"
+          placeholder="Tell us anything relevant to your application"
+        ></textarea>
+
+        <div class="buttons">
+          <button class="back" type="button" onclick="previousStep(2)">
+            Back
+          </button>
+
+          <button class="next" type="button" onclick="nextStep(2)">
+            Review
+          </button>
+        </div>
+
+      </section>
+
+
+      <!-- STEP 3 -->
+      <section id="step3" class="step">
+
+        <h2>Review Application</h2>
+
+        <p class="subtitle">
+          Check your information before submitting your application.
+        </p>
+
+        <div class="review">
+
+          <div class="review-row">
+            <span>Full Name</span>
+            <span id="reviewName">-</span>
+          </div>
+
+          <div class="review-row">
+            <span>Phone</span>
+            <span id="reviewPhone">-</span>
+          </div>
+
+          <div class="review-row">
+            <span>Email</span>
+            <span id="reviewEmail">-</span>
+          </div>
+
+          <div class="review-row">
+            <span>Location</span>
+            <span id="reviewLocation">-</span>
+          </div>
+
+          <div class="review-row">
+            <span>Loan Amount</span>
+            <span id="reviewAmount">-</span>
+          </div>
+
+          <div class="review-row">
+            <span>Loan Term</span>
+            <span id="reviewTerm">-</span>
+          </div>
+
+          <div class="review-row">
+            <span>Purpose</span>
+            <span id="reviewPurpose">-</span>
+          </div>
+
+          <div class="review-row">
+            <span>Monthly Income</span>
+            <span id="reviewIncome">-</span>
+          </div>
+
+        </div>
+
+        <label class="consent">
+          <input id="consent" type="checkbox">
+
+          <span>
+            I confirm that the information provided is accurate and I agree
+            that it may be used to process this loan application.
+          </span>
+        </label>
+
+        <div class="buttons">
+
+          <button class="back" type="button" onclick="previousStep(3)">
+            Back
+          </button>
+
+          <button class="submit" type="button" onclick="submitApplication()">
+            Submit Application
+          </button>
+
+        </div>
+
+        <div class="security">
+          <strong>Security notice:</strong>
+          Never enter or share your mobile-money PIN, password, or OTP
+          with a loan agent or through this application.
+        </div>
+
+      </section>
+
+
+      <!-- SUCCESS -->
+      <section id="success" class="success">
+
+        <div class="success-icon">
+          ✓
+        </div>
+
+        <h2>Application Submitted</h2>
+
+        <p>
+          Your loan application has been received successfully.
+        </p>
+
+        <div class="application-number">
+          Application No: <span id="applicationNumber"></span>
+        </div>
+
+        <p>
+          Keep your application number for future reference.
+        </p>
+
+      </section>
+
+    </div>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      Please provide accurate information when completing your application.
+    </p>
+
+    <p>
+      © 2026 Uganda Loan Application Portal
+    </p>
+  </footer>
+
+
+  <script>
+
+    let currentStep = 1;
+
+    function showStep(step) {
+
+      document.querySelectorAll(".step").forEach(function(section) {
+        section.classList.remove("active");
+      });
+
+      document.getElementById("step" + step).classList.add("active");
+
+      for (let i = 1; i <= 3; i++) {
+        document.getElementById("bar" + i).classList.remove("active");
+      }
+
+      for (let i = 1; i <= step; i++) {
+        document.getElementById("bar" + i).classList.add("active");
+      }
+
+      currentStep = step;
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+
+
+    function validateStep1() {
+
+      const name = document.getElementById("fullName").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const location = document.getElementById("location").value.trim();
+
+      if (!name) {
+        alert("Please enter your full name.");
+        return false;
+      }
+
+      if (!/^07[0-9]{8}$/.test(phone)) {
+        alert("Please enter a valid Uganda mobile number, for example 0771234567.");
+        return false;
+      }
+
+      if (!location) {
+        alert("Please enter your district or location.");
+        return false;
+      }
+
+      return true;
+    }
+
+
+    function validateStep2() {
+
+      const amount = document.getElementById("amount").value;
+      const term = document.getElementById("term").value;
+      const purpose = document.getElementById("purpose").value;
+
+      if (!amount || Number(amount) <= 0) {
+        alert("Please enter the loan amount.");
+        return false;
+      }
+
+      if (!term) {
+        alert("Please select a loan term.");
+        return false;
+      }
+
+      if (!purpose) {
+        alert("Please select the purpose of the loan.");
+        return false;
+      }
+
+      return true;
+    }
+
+
+    function nextStep(step) {
+
+      if (step === 1 && !validateStep1()) {
+        return;
+      }
+
+      if (step === 2 && !validateStep2()) {
+        return;
+      }
+
+      if (step === 2) {
+
+        document.getElementById("reviewName").textContent =
+          document.getElementById("fullName").value;
+
+        document.getElementById("reviewPhone").textContent =
+          document.getElementById("phone").value;
+
+        document.getElementById("reviewEmail").textContent =
+          document.getElementById("email").value || "Not provided";
+
+        document.getElementById("reviewLocation").textContent =
+          document.getElementById("location").value;
+
+        document.getElementById("reviewAmount").textContent =
+          "UGX " + Number(document.getElementById("amount").value)
+            .toLocaleString();
+
+        document.getElementById("reviewTerm").textContent =
+          document.getElementById("term").value;
+
+        document.getElementById("reviewPurpose").textContent =
+          document.getElementById("purpose").value;
+
+        document.getElementById("reviewIncome").textContent =
+          document.getElementById("income").value
+          ? "UGX " + Number(document.getElementById("income").value)
+              .toLocaleString()
+          : "Not provided";
+      }
+
+      showStep(step + 1);
+    }
+
+
+    function previousStep(step) {
+      showStep(step - 1);
+    }
+
+
+    function submitApplication() {
+
+      const consent = document.getElementById("consent").checked;
+
+      if (!consent) {
+        alert("Please confirm that the information you provided is accurate.");
+        return;
+      }
+
+      /*
+        IMPORTANT:
+
+        This demo records the application only in the browser.
+
+        To send applications to your own secure system, replace this
+        section with a POST request to your backend endpoint.
+
+        Example:
+
+        fetch("/api/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(applicationData)
+        });
+      */
+
+      const applicationData = {
+        name: document.getElementById("fullName").value,
+        phone: document.getElementById("phone").value,
+        email: document.getElementById("email").value,
+        location: document.getElementById("location").value,
+        amount: document.getElementById("amount").value,
+        term: document.getElementById("term").value,
+        purpose: document.getElementById("purpose").value,
+        income: document.getElementById("income").value,
+        additionalInformation:
+          document.getElementById("message").value
+      };
+
+      console.log("Loan application:", applicationData);
+
+      const applicationNumber =
+        "UG-" +
+        Date.now().toString().slice(-8);
+
+      document.getElementById("applicationNumber").textContent =
+        applicationNumber;
+
+      document.querySelectorAll(".step").forEach(function(section) {
+        section.classList.remove("active");
+      });
+
+      document.getElementById("success").style.display = "block";
+
+      document.querySelectorAll(".progress div").forEach(function(bar) {
+        bar.classList.add("active");
+      });
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+
+  </script>
+
+</body>
+  </html>
