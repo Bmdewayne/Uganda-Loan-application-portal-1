@@ -3,174 +3,99 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Uganda Loan Portal</title>
+  <title>Uganda Loan Application</title>
 
   <style>
-    :root {
-      --yellow: #ffcc00;
-      --dark-blue: #003b5c;
-      --blue: #005b82;
-      --cream: #fffdf2;
-      --white: #ffffff;
-      --text: #222222;
-      --border: #d6d6d6;
-    }
-
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
     }
 
     body {
-      margin: 0;
-      padding: 20px;
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background: var(--cream);
-      color: var(--text);
-    }
-
-    .container {
-      width: 100%;
-      max-width: 460px;
-      margin: 25px auto;
-      background: var(--white);
-      border-radius: 14px;
-      box-shadow: 0 5px 25px rgba(0,0,0,0.12);
-      overflow: hidden;
+      background: #f4f6f8;
+      color: #222;
     }
 
     .header {
-      background: var(--yellow);
-      padding: 24px 20px;
+      background: #ffcc00;
+      padding: 22px 18px;
       text-align: center;
+      border-bottom: 5px solid #222;
     }
 
     .header h1 {
-      margin: 0;
-      color: var(--dark-blue);
-      font-size: 24px;
+      font-size: 25px;
+      color: #222;
     }
 
     .header p {
-      margin: 8px 0 0;
-      color: var(--dark-blue);
+      margin-top: 6px;
       font-size: 14px;
     }
 
-    .content {
+    .container {
+      width: 92%;
+      max-width: 520px;
+      margin: 25px auto;
+    }
+
+    .card {
+      background: white;
       padding: 25px;
+      border-radius: 14px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     }
 
-    .progress {
-      height: 7px;
-      background: #eeeeee;
-      border-radius: 10px;
-      margin-bottom: 25px;
-      overflow: hidden;
+    .card h2 {
+      margin-bottom: 8px;
+      color: #222;
     }
 
-    .progress-bar {
-      height: 100%;
-      width: 25%;
-      background: var(--yellow);
-      transition: width 0.3s ease;
-    }
-
-    .step {
-      display: none;
-    }
-
-    .step.active {
-      display: block;
-    }
-
-    h2 {
-      color: var(--dark-blue);
-      margin-top: 0;
-      margin-bottom: 20px;
-      font-size: 20px;
-    }
-
-    .form-group {
-      margin-bottom: 18px;
+    .intro {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 22px;
     }
 
     label {
       display: block;
+      margin-top: 15px;
       margin-bottom: 7px;
-      font-size: 14px;
       font-weight: bold;
-      color: var(--dark-blue);
+      font-size: 14px;
     }
 
-    input,
-    select,
-    textarea {
+    input, select {
       width: 100%;
       padding: 13px;
-      border: 1px solid var(--border);
-      border-radius: 7px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
       font-size: 15px;
-      background: white;
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus {
       outline: none;
-      border-color: var(--dark-blue);
     }
 
-    textarea {
-      resize: vertical;
+    input:focus, select:focus {
+      border-color: #ffcc00;
     }
 
-    button {
+    .button {
       width: 100%;
+      margin-top: 24px;
       padding: 14px;
+      background: #ffcc00;
+      color: #111;
       border: none;
-      border-radius: 7px;
-      background: var(--yellow);
-      color: var(--dark-blue);
+      border-radius: 8px;
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
-      margin-top: 5px;
     }
 
-    button:hover {
+    .button:hover {
       background: #e6b800;
     }
 
-    .back {
-      background: var(--dark-blue);
-      color: white;
-      margin-bottom: 10px;
-    }
-
-    .summary {
-      background: #f2f7fa;
-      border-left: 4px solid var(--yellow);
-      padding: 15px;
-      border-radius: 7px;
-      line-height: 1.8;
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
-
-    .notice {
-      margin-top: 15px;
-      font-size: 12px;
-      color: #666;
-      line-height: 1.5;
-      text-align: center;
-    }
-  </style>
-</head>
-
-<body>
-
-<div class="container">
-
-  <div class="header">
-    <
+    .message {
+      display
